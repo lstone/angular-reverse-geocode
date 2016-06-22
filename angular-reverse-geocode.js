@@ -13,27 +13,27 @@
             locationNotFoundText: '@?',
             geocodeFailureText: '@?'
         },
-        template: '<span class="reverse-geocoded-address">{{$ctrl.address}}</span>',
         controller: function () {
             var vm = this;
-            vm.address = '';
             var defaultResultsIndex = 0;
             var defaultLocationNotFoundText = 'Location not found';
             var defaultGeocodeFailureText = 'Geocoder failed due to: ';
             var geocoder = new google.maps.Geocoder();
             var latlng = new google.maps.LatLng(vm.lat, vm.lng);
+            var resultsIndex = vm.geocodeResultsIndex || defaultResultsIndex;
 
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[defaultResultsIndex]) {
-                        vm.address = results[vm.geocodeResultsIndex || defaultResultsIndex].formatted_address;
-                    } else {
-                        vm.address = vm.locationNotFoundText || defaultLocationNotFoundText
-                    }
+                console.log(results, status);
+                if (status === 'OK') {
+                    vm.address = results[resultsIndex].formatted_address;
+                } else if (status === 'ZERO_RESULTS') {
+                    vm.address = vm.locationNotFoundText || defaultLocationNotFoundText
                 } else {
                     vm.address = vm.geocodeFailureText || (defaultGeocodeFailureText + status);
                 }
             });
-        }
+        },
+        template: '<div class="reverse-geocoded-address">{{$ctrl.address}}</div>'
     });
+
 })();
