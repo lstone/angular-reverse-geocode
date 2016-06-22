@@ -1,8 +1,9 @@
 {
   "name": "angular-reverse-geocode",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "authors": [
-    "Jason Watmore <jason@pointblankdevelopment.com.au> (http://jasonwatmore.com)"
+    "Jason Watmore <jason@pointblankdevelopment.com.au> (http://jasonwatmore.com)",
+    "Larry Stone <larry@symbolshift.com>"
   ],
   "description": "AngularJS reverse geocoding directive",
   "main": "angular-reverse-geocode.js",
@@ -21,6 +22,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.16"
+    "angular": "~1.5.5"
   }
 }
