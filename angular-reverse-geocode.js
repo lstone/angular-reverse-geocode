@@ -13,7 +13,7 @@
             locationNotFoundText: '@?',
             geocodeFailureText: '@?'
         },
-        controller: function () {
+        controller: function ($scope) {
             var vm = this;
             var defaultResultsIndex = 0;
             var defaultLocationNotFoundText = 'Location not found';
@@ -30,6 +30,7 @@
                 } else {
                     vm.address = vm.geocodeFailureText || (defaultGeocodeFailureText + status);
                 }
+                $scope.$apply();
             });
         },
         template: '<div class="reverse-geocoded-address">{{$ctrl.address}}</div>'
