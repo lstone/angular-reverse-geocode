@@ -14,9 +14,10 @@
               locationNotFoundText: '@?',
               geocodeFailureText: '@?'
             },
-            template: '<span class="reverse-geocoded-address"></span>',
-            controller: function ($element) {
+            template: '<span class="reverse-geocoded-address">{{$ctrl.address}}</span>',
+            controller: function () {
                 var vm = this;
+                vm.address = '';
                 var defaultResultsIndex = 0;
                 var defaultLocationNotFoundText = 'Location not found';
                 var defaultGeocodeFailureText = 'Geocoder failed due to: ';
@@ -26,12 +27,12 @@
                 geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[defaultResultsIndex]) {
-                            $element.text(results[vm.geocodeResultsIndex || defaultResultsIndex].formatted_address);
+                            vm.address = results[vm.geocodeResultsIndex || defaultResultsIndex].formatted_address;
                         } else {
-                            $element.text(vm.locationNotFoundText || defaultLocationNotFoundText);
+                            vm.address = vm.locationNotFoundText || defaultLocationNotFoundText
                         }
                     } else {
-                        $element.text(vm.geocodeFailureText || (defaultGeocodeFailureText + status));
+                        vm.address = vm.geocodeFailureText || (defaultGeocodeFailureText + status);
                     }
                 });
             }
