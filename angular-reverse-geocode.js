@@ -23,7 +23,6 @@
             var resultsIndex = vm.geocodeResultsIndex || defaultResultsIndex;
 
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                console.log(results, status);
                 if (status === 'OK') {
                     vm.address = results[resultsIndex].formatted_address;
                 } else if (status === 'ZERO_RESULTS') {
